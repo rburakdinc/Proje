@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">İşte Karşınızda Sevimli Dostlarımız</h1>
+        <p class="lead"></p>
+    </div>
+
+</div>
+    <div class="row">
+        <div class="col-md-12">
+            
+            {%if hayvanlar %}
+                {% for hayvan in hayvanlar %}
+                    <div class="card mb-3">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img class = "card-img" src="{% static hayvan.get_image_path %}" alt="">
+                        </div>
+                        <div class="col-md-9">
+                            <div class="card-body">
+                                <div class="card-title">
+                                  <a href="{% url 'detail' hayvan.id %}"> {{hayvan.name}} </a>
+                                </div>
+                                <p class="card-text">
+                                    {{hayvan.description}}
+                                </p>
+                            <p class = "card-text">
+                                <small class="text-muted">{{hayvan.created_date}}</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    
+                {%endfor%}
+            
+            {%else%}
+                <div class="alert alert-warning">
+                    <p>
+                        Hayvan Bulunamadı
+                    </p>
+                </div>
+            
+            {%endif%}
+            
+            
+            
+        </div>
+    </div>
+{% endblock %}
